@@ -9,6 +9,6 @@ class PostCollection extends ResourceCollection
 {
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return ['posts'=>$this->collection];
     }
 }
