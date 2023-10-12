@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Action\Post\CreatePostAction;
+use App\Action\Post\NewCommentAction;
 use App\Http\Requests\Post\CreatePostRequest;
+use App\Http\Requests\Post\NewCommentRequest;
 use App\Http\Resources\Post\PostCollection;
 use App\Http\Resources\Post\PostResource;
 use App\Models\Post;
@@ -13,7 +15,7 @@ class PostController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:sanctum')->only(['create']);
+        $this->middleware('auth:sanctum')->only(['create','comment']);
     }
 
     public function index()
@@ -26,7 +28,7 @@ class PostController extends Controller
     public function search(Post $post)
     {
         return $this->ok(
-            PostResource::make($post->load('category','comments.user'))
+            PostResource::make($post->load('category', 'comments.user'))
         );
     }
 
@@ -36,5 +38,11 @@ class PostController extends Controller
         return $this->created(
             PostResource::make($newPost),
         );
+    }
+
+    public function comment(Post $post, NewCommentRequest $request, NewCommentAction $newCommentAction)
+    {
+        $newCommentAction->execute($post, $request->user(), $request->validated());
+        return $this->created();
     }
 }
