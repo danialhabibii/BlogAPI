@@ -26,7 +26,7 @@ class PostController extends Controller
     public function search(Post $post)
     {
         return $this->ok(
-            PostResource::make($post->load('category'))
+            PostResource::make($post->load('category','comments'))
         );
     }
 
