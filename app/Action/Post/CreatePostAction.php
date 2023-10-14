@@ -3,11 +3,12 @@
 namespace App\Action\Post;
 
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Support\Str;
 
 class CreatePostAction
 {
-    public function execute(array $data): Post
+    public function execute(User $user, array $data): Post
     {
         $randomSlug = Str::random(4);
         return Post::query()->create([
@@ -16,5 +17,6 @@ class CreatePostAction
             'title' => $data['title'],
             'description' => $data['description'],
         ]);
+
     }
 }

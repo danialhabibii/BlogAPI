@@ -34,7 +34,8 @@ class PostController extends Controller
 
     public function create(CreatePostRequest $request, CreatePostAction $createPostAction)
     {
-        $newPost = $createPostAction->execute($request->validated());
+        $this->authorize('access',$request->user());
+        $newPost = $createPostAction->execute($request->user(), $request->validated());
         return $this->created(
             PostResource::make($newPost),
         );

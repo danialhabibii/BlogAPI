@@ -16,7 +16,6 @@ class UserLoginAction
                 'email' => ['The provided credentials are incorrect'],
             ]);
         }
-
-        return $user->createToken(request()->header('User-Agent', 'Unknown User Agent'))->plainTextToken;
+        return $user->createToken(request()->header('User-Agent', 'Unknown User Agent'), ['type:user'])->plainTextToken;
     }
 }
