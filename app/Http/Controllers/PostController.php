@@ -15,13 +15,13 @@ class PostController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:sanctum')->only(['create','comment']);
+        $this->middleware('auth:sanctum')->only(['create', 'comment']);
     }
 
     public function index()
     {
         return $this->ok(
-            new PostCollection(Post::all()),
+            new PostCollection(Post::paginate(10)),
         );
     }
 
