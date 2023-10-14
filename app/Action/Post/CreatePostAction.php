@@ -10,7 +10,7 @@ class CreatePostAction
     public function execute(array $data): Post
     {
         $randomSlug = Str::random(4);
-        return Post::create([
+        return Post::query()->create([
             'slug' => $randomSlug,
             'category_id' => $data['category_id'],
             'title' => $data['title'],
