@@ -12,6 +12,7 @@ use App\Http\Requests\Post\NewCommentRequest;
 use App\Http\Requests\Post\UpdatePostRequest;
 use App\Http\Resources\Post\PostCollection;
 use App\Http\Resources\Post\PostResource;
+use App\Http\Resources\Post\SearchResource;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use mysql_xdevapi\CollectionModify;
@@ -30,10 +31,17 @@ class PostController extends Controller
         );
     }
 
+    public function latest()
+    {
+        return $this->ok(
+            new PostCollection(Post::latest()->take(10)->get()),
+    );
+    }
+
     public function search(Post $post)
     {
         return $this->ok(
-            PostResource::make($post->load('category', 'comments.user'))
+            SearchResource::make($post->load('category', 'comments.user'))
         );
     }
 
