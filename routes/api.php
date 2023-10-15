@@ -17,6 +17,7 @@ Route::group(['prefix' => 'v1'], function () {
     Route::group(['prefix' => 'posts'], function () {
         Route::get('/', [PostController::class, 'index']);
         Route::post('create', [PostController::class, 'create']);
+        Route::put('update/{post:slug}', [PostController::class, 'update']);
         Route::get('search/{post:slug}', [PostController::class, 'search']);
         Route::post('newComment/{post:slug}', [PostController::class, 'comment']);
     });

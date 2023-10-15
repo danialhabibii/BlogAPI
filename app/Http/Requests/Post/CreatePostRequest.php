@@ -15,6 +15,7 @@ class CreatePostRequest extends FormRequest
     {
         return [
             'category_id' => ['required', 'integer'],
+            'status' => ['required', 'string', 'max:30'],
             'title' => ['required', 'string', 'min:4', 'max:30'],
             'description' => ['required', 'string', 'min:10', 'max:500'],
         ];
