@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->unsignedInteger('category_id');
             $table->string('title');
             $table->longText('description');
+            $table->string('picture');
             $table->string('status');
             $table->timestamps();
         });

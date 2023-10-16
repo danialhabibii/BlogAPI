@@ -16,6 +16,7 @@ class CreatePostAction
             'category_id' => $data['category_id'],
             'title' => $data['title'],
             'description' => $data['description'],
+            'picture' => $data['picture'],
             'status' => $data['status'],
         ]);
 
