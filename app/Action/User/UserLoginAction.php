@@ -8,7 +8,7 @@ use Illuminate\Validation\ValidationException;
 
 class UserLoginAction
 {
-    public function execute(array $data): string
+    public function execute(array $data)
     {
         $user = User::firstWhere('email', $data['email']);
         if (!$user || !Hash::check($data['password'], $user->password)) {
@@ -16,6 +16,9 @@ class UserLoginAction
                 'email' => ['The provided credentials are incorrect'],
             ]);
         }
-        return $user->createToken(request()->header('User-Agent', 'Unknown User Agent'), ['type:user'])->plainTextToken;
+        return [
+            'token' => $user->createToken(request()->header('User-Agent', 'Unknown User Agent'), ['type:user'])->plainTextToken,
+            'user'=>$user,
+        ];
     }
 }

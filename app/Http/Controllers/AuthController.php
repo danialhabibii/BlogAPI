@@ -11,6 +11,7 @@ use App\Http\Requests\User\UserLoginRequest;
 use App\Http\Requests\User\UserRegistrationRequest;
 use App\Http\Resources\User\UserTokenResource;
 use Illuminate\Http\Request;
+use Laravel\Sanctum\PersonalAccessToken;
 
 class AuthController extends Controller
 {
